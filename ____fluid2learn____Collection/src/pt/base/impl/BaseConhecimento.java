@@ -18,10 +18,12 @@ public class BaseConhecimento implements IBaseConhecimento
 	
 	private String scenario;
 	
+        @Override
 	public void setScenario(String scenario) {
 		this.scenario = scenario;
 	}
 	
+        @Override
     public String[] listaNomes()
     {
     	File diretorioRaiz = new File(diretorio + "/" + scenario);

@@ -63,12 +63,14 @@ public class ResponderAnimals implements IResponder
 		Scanner scanner = new Scanner(System.in);
 				
 		System.out.println("Escolha um animal da lista a seguir:");
+                
+                bc.setScenario("animals");
 		for (String s : bc.listaNomes())
 			System.out.println(s);
 		
 		System.out.print("  --> Sua escolha: ");
 		this.animal = scanner.nextLine();
-		this.obj = bc.recuperaObjeto(animal);
+		this.obj = bc.recuperaObjeto(animal.toLowerCase());
 		this.estatisticas = estatisticas;
 		this.questionCounter = 0;
 		
