@@ -76,6 +76,7 @@ public class ResponderMaze implements IResponder {
 		return resposta;
 	}
 	
+        @Override
 	public boolean move(String direction) {
 		boolean movimento = true;
 		int novaLinha = linhaAtual,
@@ -85,6 +86,7 @@ public class ResponderMaze implements IResponder {
 			case "sul":   novaLinha++; break;
 			case "leste": novaColuna++; break;
 			case "oeste": novaColuna--; break;
+                        default: return false;
 		}
 		if (novaLinha < 0 || novaLinha >= nLinhas ||
 			novaColuna < 0 || novaColuna >= nColunas ||
