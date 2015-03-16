@@ -1,11 +1,8 @@
 package pt.substance.actors;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
-import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import pt.base.inter.IEnquirer;
 import pt.base.inter.IResponder;
@@ -60,6 +57,64 @@ public class EnquirerMaze implements IEnquirer {
         this.responder = responder;
     }
 
+    @Override
+    public boolean discover() {
+        Scanner scanner = new Scanner(System.in);
+        String gameMode;
+        boolean continua = true, continua2;
+
+        while (continua) {
+            System.out.println("\nDeseja desvendar os segredos do labirinto manualmente(M)..."
+                    + "Ou será que prefere ser guiado(G)?\n\n\n\n\n");
+
+            System.out.print("  --> Sua escolha: ");
+            gameMode = scanner.nextLine();
+            continua2 = true;
+            while (continua2) {
+                switch (gameMode.toLowerCase()) {
+                    case "manualmente":
+                    case "manual":
+                    case "m":
+                        discover_manual();
+                        break;
+                    case "automatico":
+                    case "auto":
+                    case "guiado":
+                    case "g":
+                        discover_auto();
+                        break;
+                    case "f":
+                    case "fim":
+                        continua = false;
+                        continua2 = false;
+                        break;
+
+                    default:
+                        System.out.println("\nResposta incompreendida. Para escolher"
+                                + "outro jogo, digite F. Ou tente novamente..."
+                                + " se for corajoso o suficiente.");
+                        break;
+                }
+                if (continua) {
+                    System.out.print("Deseja jogar de novo?: ");
+                }
+                gameMode = scanner.nextLine();
+
+                switch (gameMode.toLowerCase()) {
+
+                    case "nao":
+                    case "n":
+                        continua = false;
+                    case "sim":
+                    case "s":
+                        continua2 = false;
+                        
+                }
+                        
+                }
+            }
+return true;
+    }
 
     public boolean discover_manual() {
         Scanner scanner = new Scanner(System.in);
@@ -94,19 +149,15 @@ public class EnquirerMaze implements IEnquirer {
         return true;
     }
 
-    @Override
-    public boolean discover() {
+    public boolean discover_auto() {
         map = new ArrayList<>();
-        
-        
-        System.out.println ("Iniciando caminhada no labirinto...\n");
 
-        
-        
-        if (reachEnd(new Par(0,0))) //define a origem como ponto de partida
+        System.out.println("Iniciando caminhada no labirinto...");
+
+        if (reachEnd(new Par(0, 0))) //define a origem como ponto de partida
+        {
             return true;
-
-        else {
+        } else {
             System.out.println("Nao foi possivel encontrar a saida");
             return false;
         }
@@ -114,10 +165,10 @@ public class EnquirerMaze implements IEnquirer {
 
     private boolean reachEnd(Par pos) {
         if (responder.finalAnswer(null)) {
-            System.out.println("Saida encontrada!! Está a " + pos.i + " posições ao Norte e " + pos.j
-                    + " posições a Leste do ponto de partida.\n\n"
-                    + "Nota: Posicoes negativas representam saida ao Sul e Oeste,"
-                    + " respectivamente.\n");
+            System.out.println("\n\n\nSaida encontrada!! Está a " + pos.i + " posições ao Norte e " + pos.j
+                    + " posições a Leste do ponto de partida.\n\n\n\n"
+                    + "**Nota: Posicoes negativas representam saida ao Sul e Oeste,"
+                    + " respectivamente.**\n");
             return true;
         } else {
 
@@ -131,21 +182,31 @@ public class EnquirerMaze implements IEnquirer {
                     if (this.reachEnd(new Par(pos.i + 1, pos.j))) {
                         return true;
                     }
-                } else if (responder.ask("leste").equals("passagem") || responder.ask("leste").equals("saida")) {
+                    responder.move("sul");
+                }
+
+                if (responder.ask("leste").equals("passagem") || responder.ask("leste").equals("saida")) {
                     responder.move("leste");
                     if (this.reachEnd(new Par(pos.i, pos.j + 1))) {
                         return true;
                     }
-                } else if (responder.ask("oeste").equals("passagem") || responder.ask("oeste").equals("saida")) {
+                    responder.move("oeste");
+                }
+
+                if (responder.ask("oeste").equals("passagem") || responder.ask("oeste").equals("saida")) {
                     responder.move("oeste");
                     if (this.reachEnd(new Par(pos.i, pos.j - 1))) {
                         return true;
                     }
-                } else if (responder.ask("sul").equals("passagem") || responder.ask("sul").equals("saida")) {
+                    responder.move("leste");
+                }
+
+                if (responder.ask("sul").equals("passagem") || responder.ask("sul").equals("saida")) {
                     responder.move("sul");
                     if (this.reachEnd(new Par(pos.i - 1, pos.j))) {
                         return true;
                     }
+                    responder.move("norte");
                 }
             }
         }

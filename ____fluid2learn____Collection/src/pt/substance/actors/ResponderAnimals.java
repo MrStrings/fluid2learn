@@ -12,9 +12,9 @@ import pt.base.inter.IStatistics;
 
 public class ResponderAnimals implements IResponder
 {
-	private String animal;
-	private IObjetoConhecimento obj;
-	private IStatistics estatisticas;
+	private final String animal;
+	private final IObjetoConhecimento obj;
+	private final IStatistics estatisticas;
 	private int questionCounter;
 	private boolean jaPerguntou = false;
 	
@@ -37,7 +37,8 @@ public class ResponderAnimals implements IResponder
 	 * Carrega o objeto de conhecimento referente ao animal escolhido.
 	 * Instancia a estrutura de dados que irá armazenar as estatísticas do Enquirer.
 	 * 
-	 * @param 	animal	nome do anima escolhido pelo Responder	
+         * @param estatisticas  armazena estatisticas das perguntas realizadas
+	 * @param 	animal	nome do animal escolhido pelo Responder	
 	 */
 	public ResponderAnimals(IStatistics estatisticas, String animal)
 	{
@@ -56,6 +57,7 @@ public class ResponderAnimals implements IResponder
 	 * Realiza a instanciação da base de conhecimento do animal escolhido.
 	 * Carrega o objeto de conhecimento referente ao animal escolhido.
 	 * Instancia a estrutura de dados que irá armazenar as estatísticas do Enquirer.
+         * @param estatisticas armazena estatisticas das perguntas realizadas
 	 */
 	public ResponderAnimals(IStatistics estatisticas){
 
@@ -77,15 +79,17 @@ public class ResponderAnimals implements IResponder
 		scanner.close();
 	}	
 
+        @Override
 	public String scenario() {
 		return "animals";
 	}
 	
 	/**
 	 * Responde ao Enquirer alguma pergunta de acordo com o animal escolhido.
-	 * @param	questio	string com propriedade do animal
+	 * @param	question	string com propriedade do animal
 	 * @return	string	um de três valores: "sim", "nao" ou "nao sei"
 	 */
+        @Override
 	public String ask(String question)
 	{
 		String resp = "nao sei";
@@ -104,6 +108,7 @@ public class ResponderAnimals implements IResponder
 		return resp;
 	}
 
+        @Override
 	public boolean move(String direction) {
 		return false;
 	}
@@ -113,6 +118,7 @@ public class ResponderAnimals implements IResponder
 	 * @param 	answer	nome do animal adivinhado pelo Enquirer
 	 * @return	boolean	retorna confirmando ou negando o acerto
 	 */
+        @Override
 	public boolean finalAnswer(String answer)
 	{
 		boolean acertou = false;

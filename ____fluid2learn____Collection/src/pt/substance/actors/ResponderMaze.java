@@ -16,7 +16,7 @@ public class ResponderMaze implements IResponder {
 	
 	public ResponderMaze(IStatistics estatisticas, String maze) {
 		IBaseConhecimento bc = new BaseConhecimento();
-        bc.setScenario("maze");
+                bc.setScenario("maze");
 		
 		this.obj = bc.recuperaObjeto(maze);
 
