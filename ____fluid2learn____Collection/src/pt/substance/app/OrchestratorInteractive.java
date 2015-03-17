@@ -28,18 +28,21 @@ public class OrchestratorInteractive {
         boolean continua = true;
         while (continua) {
             System.out.print("Escolha seu jogo:\n Animals(A) or Maze(M): ");
- 
-            gameName = scanner.nextLine();
+
+            gameName = scanner.nextLine(); //entrada do usuário
+            while (gameName.length() == 0) // Evita possiveis erros
+            {
+                gameName = scanner.nextLine();
+            }
+
             switch (gameName.toUpperCase()) {
                 case "A":
                 case "ANIMALS":
                     base.setScenario("animals");
                     resp = new ResponderAnimals(stat); // Jah pergunta qual animal sera
                     enq = new EnquirerAnimals();
-                    if (enq != null) {
-                        enq.connect(resp);
-                        enq.discover();
-                    }
+                    enq.connect(resp);
+                    enq.discover();
                     break;
                 case "M":
                 case "MAZE":
@@ -50,14 +53,16 @@ public class OrchestratorInteractive {
                         System.out.println(s);
                     }
                     System.out.print("  --> Sua escolha: ");
-                    String gameArena = scanner.nextLine();
+                    String gameArena = scanner.nextLine(); // Le entrada do usuario
+                    while (gameArena.length() == 0) //Evita possiveis erros
+                    {
+                        gameArena = scanner.nextLine();
+                    }
 
                     resp = new ResponderMaze(stat, gameArena.toLowerCase());
                     enq = new EnquirerMaze();
-                    if (enq != null) {
-                        enq.connect(resp);
-                        enq.discover();
-                    }
+                    enq.connect(resp);
+                    enq.discover();
                     break;
                 default:
                     System.out.println("\nJogo nao encontrado.");
@@ -67,6 +72,11 @@ public class OrchestratorInteractive {
                     + "selecionar um jogo ou STOP para "
                     + "encerrar o aplicativo: ");
             gameName = scanner.nextLine();
+            while (gameName.length() == 0) // Evita possiveis erros
+            {
+                gameName = scanner.nextLine();
+            }
+
             switch (gameName.toUpperCase()) {
                 case "C":
                 case "CONTINUE":

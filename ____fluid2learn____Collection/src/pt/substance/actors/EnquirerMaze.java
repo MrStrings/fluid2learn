@@ -62,13 +62,18 @@ public class EnquirerMaze implements IEnquirer {
         Scanner scanner = new Scanner(System.in);
         String gameMode;
         boolean continua = true, continua2;
+        
+        System.out.println("Iniciando o jogo...\n\n"
+                + "-------*-------*-------*-------*-------*-------*-------*-------*-------*-------*");
 
         while (continua) {
-            System.out.println("\nDeseja desvendar os segredos do labirinto manualmente(M)..."
-                    + "Ou será que prefere ser guiado(G)?\n\n\n\n\n");
+            System.out.println("Deseja desvendar os segredos do labirinto manualmente(M)...\n"
+                    + "Ou será que prefere ser guiado(G)?");
 
             System.out.print("  --> Sua escolha: ");
             gameMode = scanner.nextLine();
+            while (gameMode.length() == 0) // Evita possiveis erros
+                gameMode = scanner.nextLine();
             continua2 = true;
             while (continua2) {
                 switch (gameMode.toLowerCase()) {
@@ -99,11 +104,14 @@ public class EnquirerMaze implements IEnquirer {
                     System.out.print("Deseja jogar de novo?: ");
                 }
                 gameMode = scanner.nextLine();
+                while (gameMode.length() == 0) // Evita possiveis erros
+                    gameMode = scanner.nextLine();
 
                 switch (gameMode.toLowerCase()) {
 
                     case "nao":
                     case "n":
+                        System.out.println ("-------*-------*-------*-------*-------*-------*-------*-------*-------*-------*");
                         continua = false;
                     case "sim":
                     case "s":
@@ -152,7 +160,7 @@ return true;
     public boolean discover_auto() {
         map = new ArrayList<>();
 
-        System.out.println("Iniciando caminhada no labirinto...");
+        System.out.println("\nIniciando caminhada no labirinto...");
 
         if (reachEnd(new Par(0, 0))) //define a origem como ponto de partida
         {
@@ -165,8 +173,8 @@ return true;
 
     private boolean reachEnd(Par pos) {
         if (responder.finalAnswer(null)) {
-            System.out.println("\n\n\nSaida encontrada!! Está a " + pos.i + " posições ao Norte e " + pos.j
-                    + " posições a Leste do ponto de partida.\n\n\n\n"
+            System.out.println("\nSaida encontrada!! Está a " + pos.i + " posições ao Norte e " + pos.j
+                    + " posições a Leste do ponto de partida.\n\n"
                     + "**Nota: Posicoes negativas representam saida ao Sul e Oeste,"
                     + " respectivamente.**\n");
             return true;
