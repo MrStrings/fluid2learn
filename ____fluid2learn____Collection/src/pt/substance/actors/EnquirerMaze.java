@@ -173,10 +173,12 @@ return true;
 
     private boolean reachEnd(Par pos) {
         if (responder.finalAnswer(null)) {
-            System.out.println("\nSaida encontrada!! Está a " + pos.i + " posições ao Norte e " + pos.j
-                    + " posições a Leste do ponto de partida.\n\n"
-                    + "**Nota: Posicoes negativas representam saida ao Sul e Oeste,"
-                    + " respectivamente.**\n");
+            System.out.printf("\nSaida encontrada!! Está a %d posições ao %s e %d"
+                    + " posições a %s do ponto de partida.\n",
+                    pos.i > 0 ? pos.i : -pos.i,
+                    pos.i > 0 ? "Norte" : "Sul",
+                    pos.j > 0 ? pos.j : -pos.j,
+                    pos.j > 0 ? "Leste" : "Oeste");
             return true;
         } else {
 
