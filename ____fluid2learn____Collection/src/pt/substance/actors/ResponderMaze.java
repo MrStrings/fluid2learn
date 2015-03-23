@@ -8,7 +8,7 @@ import pt.base.inter.IResponder;
 import pt.base.inter.IStatistics;
 
 public class ResponderMaze implements IResponder {
-	private IObjetoConhecimento obj;
+    private IObjetoConhecimento obj;
 	
     private char mazeMatrix[];
 	private int nLinhas = 0, nColunas = 0;

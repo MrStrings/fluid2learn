@@ -118,13 +118,13 @@ public class EnquirerAnimals implements IEnquirer {
     
     // Cria Database, lista de QuestionInfos e de animais;
     public EnquirerAnimals() {
-        database = new TreeMap<String, TreeMap <String,Boolean>>();
+        database = new TreeMap<>();
         bc = new BaseConhecimento();
         bc.setScenario("animals");
         String[] animais_aux = bc.listaNomes();
         
-        perguntas = new ArrayList<QuestionInfo>();
-        animais = new ArrayList<String>();
+        perguntas = new ArrayList<>();
+        animais = new ArrayList<>();
         
         animais.addAll(Arrays.asList(animais_aux));
         
@@ -157,6 +157,7 @@ public class EnquirerAnimals implements IEnquirer {
     }
     
     // Inicializa responder
+    @Override
     public void connect(IResponder responder) {
         this.responder = responder;
     }
