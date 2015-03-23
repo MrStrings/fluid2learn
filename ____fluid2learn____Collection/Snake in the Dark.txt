@@ -15,3 +15,37 @@ Transmiss?o caiu.
 Drone lancado.
 Drone lancado.
 Drone lancado.
+
+
+
+class: ResponderSnake
+- HashMap Mapa <par, char>
+- IObjetoConhecimento obj;
+- int DeployNumber;
+- class Par
+	-int x
+	-int y
+- class Drone
+	- Par pos
+	- Char dir //direcao que ele vai
+	- int walk() // retorna 1 se caminhou e 0 se bateu na parede
+	- int destroy()
+	- int terminateTarget()
+- ResponderSnake (IStatistics estatisticas, String sala)
+- int senario()
+- int ask(String Question)
+- boolean move (String Direction)
+- boolean scape()
+- boolean finalAnswer (String Answer)
+
+
+class: EnquirerSnake
+-IResponder responder;
+- int numBalas;
+
+-Responder
+-boolean discover()
+-boolean situacaoDeRisco()
+-void connect(IResponder responder)
+
+
