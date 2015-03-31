@@ -58,6 +58,16 @@ public class OrchestratorInteractive {
                     {
                         gameArena = scanner.nextLine();
                     }
+                    
+                    while (!base.isListed(gameArena))
+                    {
+                        System.out.println ("AVISO: Arena Nao encontrada. Tente outro nome dentre os abaixo:");
+                        for (String s : base.listaNomes()) {
+                           System.out.println(s);
+                           System.out.print("  --> Sua escolha: ");
+                           gameArena = scanner.nextLine(); // Le entrada do usuario
+                        }
+                    }
 
                     resp = new ResponderMaze(stat, gameArena.toLowerCase());
                     enq = new EnquirerMaze();
@@ -91,6 +101,9 @@ public class OrchestratorInteractive {
 
         System.out.println("Encerrando o aplicativo");
         System.out.println("----------------------------------------------------------------------------------------\n");
+        
+        scanner.close();
+        
 
     }
 }

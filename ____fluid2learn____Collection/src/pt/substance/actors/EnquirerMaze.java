@@ -67,12 +67,12 @@ public class EnquirerMaze implements IEnquirer {
                 + "-------*-------*-------*-------*-------*-------*-------*-------*-------*-------*");
 
         while (continua) {
-            System.out.println("Deseja desvendar os segredos do labirinto manualmente(M)...\n"
+            System.out.println("\nDeseja desvendar os segredos do labirinto manualmente(M)...\n"
                     + "Ou será que prefere ser guiado(G)?");
 
             System.out.print("  --> Sua escolha: ");
             gameMode = scanner.nextLine();
-            while (gameMode.length() == 0) // Evita possiveis erros
+            while (gameMode.length() <= 0) // Evita possiveis erros
                 gameMode = scanner.nextLine();
             continua2 = true;
             while (continua2) {
@@ -95,8 +95,8 @@ public class EnquirerMaze implements IEnquirer {
                         break;
 
                     default:
-                        System.out.println("\nResposta incompreendida. Para escolher"
-                                + "outro jogo, digite F. Ou tente novamente..."
+                        System.out.println("\nAVISO: Resposta incompreendida. Para escolher"
+                                + " outro jogo, digite F. Ou tente novamente..."
                                 + " se for corajoso o suficiente.");
                         break;
                 }
@@ -111,6 +111,8 @@ public class EnquirerMaze implements IEnquirer {
 
                     case "nao":
                     case "n":
+                    case "f":
+                    case "fim":
                         System.out.println ("-------*-------*-------*-------*-------*-------*-------*-------*-------*-------*");
                         continua = false;
                     case "sim":
@@ -152,7 +154,6 @@ return true;
             System.out.println("Fuém fuém fuém!");
         }
 
-        scanner.close();
 
         return true;
     }
